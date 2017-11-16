@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlowcase.c                                    :+:      :+:    :+:   */
+/*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allauren <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jbulant <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/05 08:36:06 by allauren          #+#    #+#             */
-/*   Updated: 2017/11/09 08:12:04 by allauren         ###   ########.fr       */
+/*   Created: 2017/11/10 00:30:28 by jbulant           #+#    #+#             */
+/*   Updated: 2017/11/12 07:14:02 by jbulant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strlowcase(char *str)
-{
-	int i;
+#include "libft.h"
 
+char	*ft_strrev(char *str)
+{
+	size_t	slen;
+	size_t	i;
+	char	tmp;
+
+	if (!str)
+		return (NULL);
+	slen = ft_strlen(str);
 	i = 0;
-	while (str[i] != '\0')
+	while (i < slen)
 	{
-		if (str[i] >= 'A' && str[i] <= 'Z')
-			str[i] = str[i] + 32;
-		i++;
+		tmp = str[i];
+		str[i++] = str[--slen];
+		str[slen] = tmp;
 	}
 	return (str);
 }

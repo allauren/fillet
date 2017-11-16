@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_arstrnew.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allauren <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jbulant <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/15 12:31:29 by allauren          #+#    #+#             */
-/*   Updated: 2017/11/15 12:33:30 by allauren         ###   ########.fr       */
+/*   Created: 2017/11/09 22:19:56 by jbulant           #+#    #+#             */
+/*   Updated: 2017/11/11 05:20:24 by jbulant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdlib.h>
 #include "libft.h"
 
-int main(int argc, const char *argv[])
+char		**ft_arstrnew(size_t size)
 {
-	ft_putstr(ft_itoabase(61440, 2));
-	ft_putchar('\n');
-	ft_putstr(ft_itoabase(27648, 2));
-	return 0;
+	char **ar;
+
+	if (!(ar = (char **)malloc((size + 1) * sizeof(char *))))
+		return (NULL);
+	ar[size] = NULL;
+	return (ar);
 }

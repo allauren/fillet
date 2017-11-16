@@ -6,7 +6,7 @@
 /*   By: jbulant <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 00:07:57 by jbulant           #+#    #+#             */
-/*   Updated: 2017/11/14 05:42:08 by jbulant          ###   ########.fr       */
+/*   Updated: 2017/11/17 00:40:01 by allauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,79 +14,39 @@
 
 #include "fillit.h"
 
-t_suint	atosint(const char *tetrimino)
+int			is_valide(t_suint value)
 {
-	t_suint			 ret;
-	unsigned int	c_count;
-	size_t			i;
+	static	t_suint all[19] = {61440, 34952, 52224, 51328, 57856, 17600, 36352,
+	35008, 59392, 50240, 11776, 50688, 19584, 35904, 27648, 35968, 58368,
+	19520, 19968};
+	int	i;
 
-	ret = 0;
-	c_count = 15;
-	i = 20;
-	while (i)
+	i = 0;
+	while (i < 19)
 	{
-		if (tetrimino[i - 1] == '#')
-			ret |= 1 << c_count;
-		if (tetrimino[i - 1] != '\n')
-		{
-			ft_putchar (tetrimino[i - 1]);
-			c_count--;
-		}
-		i--;
+		if (value == all[i]) 
+			return (TRUE);
+		i++;
 	}
-	t_byte *bit = (t_byte *)&ret;
-	ft_putchar('\n');
-	ft_print_byte(bit[1]);
-	ft_print_byte(bit[0]);
-	ft_putchar('\n');
-	ft_putchar('\n');
-	return (ret);
+	return (FALSE);
 }
 
 t_bool	buf_check(const char *buf)
 {
 	unsigned int i;
-
+	
 	i = 0;
 	while (buf[i])
 	{
 		if ( i % 5 == 4 && buf[i] != '\n')
+		{	
 			return (FALSE);
+		}
 		if (buf[i] != '.' && buf[i] != '#' &&  buf[i] != '\n')
+		{
 			return (FALSE);
-		i++;
+		}
+			i++;
 	}
 	return (TRUE);
-}
-
-void	parse(int fd)
-{
-	static char buf[BUFF_SIZE + 1];
-	int			ret;
-
-	while ((ret = read(fd, buf, BUFF_SIZE)) > 1)
-	{
-		buf[ret] = '\0';
-		if (!buf_check(buf))
-		{
-			ft_putstr("error\n");
-			return ;
-		}
-		atosint(buf);
-	}
-}
-
-int		main(int ac, const char **av)
-{
-	int fd;
-
-	if (ac != 2)
-	{
-		ft_putendl(USAGE);
-		return (1);
-	}
-	if ((fd = open(av[1], O_RDONLY)) == -1)
-		return (1);
-	parse(fd);
-	return (0);
 }

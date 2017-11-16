@@ -3,40 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allauren <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jbulant <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/25 01:41:32 by allauren          #+#    #+#             */
-/*   Updated: 2017/11/09 03:57:42 by allauren         ###   ########.fr       */
+/*   Created: 2017/11/08 07:46:07 by jbulant           #+#    #+#             */
+/*   Updated: 2017/11/11 23:59:00 by jbulant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strtrim(char const *s)
+char	*ft_strtrim(const char *str)
 {
-	unsigned int		i;
-	unsigned int		begin[2];
-	char				*str;
+	char	*ret;
+	size_t	slen;
 
-	i = 0;
-	while (s && (s[i] == ' ' || s[i] == '\n' || s[i] == '\t'))
-		i++;
-	begin[0] = i;
-	begin[1] = i;
-	while (s && s[i])
-	{
-		if (s[i] != ' ' && s[i] != '\n' && s[i] != '\t')
-			begin[1] = i + 1;
-		i++;
-	}
-	if (!s || !(str = (char*)malloc(sizeof(char) * (begin[1] - begin[0] + 1))))
+	if (!str)
 		return (NULL);
-	i = 0;
-	while (i < (begin[1] - begin[0]))
-	{
-		str[i] = s[begin[0] + i];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
+	while (ft_iswhitespace(*str))
+		str++;
+	slen = ft_strlen(str);
+	while (ft_iswhitespace(str[slen - 1]) && slen > 1)
+		slen--;
+	if (!(ret = ft_strsub(str, 0, slen)))
+		return (NULL);
+	return (ret);
 }

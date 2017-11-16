@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_is_numeric.c                                :+:      :+:    :+:   */
+/*   ft_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allauren <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jbulant <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/05 09:18:01 by allauren          #+#    #+#             */
-/*   Updated: 2017/11/09 08:11:58 by allauren         ###   ########.fr       */
+/*   Created: 2017/11/10 00:25:13 by jbulant           #+#    #+#             */
+/*   Updated: 2017/11/10 00:30:13 by jbulant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_str_is_numeric(char *str)
-{
-	int c;
+#include "libft.h"
 
-	c = 0;
-	while ((str[c] >= '0' && str[c] <= '9') || str[0] == '\0')
-	{
-		c++;
-		if (str[c] == '\0')
-			return (1);
-	}
-	return (0);
+void	ft_swap(int *a, int *b)
+{
+	int tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }

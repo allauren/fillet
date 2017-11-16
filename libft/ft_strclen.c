@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strupcase.c                                     :+:      :+:    :+:   */
+/*   ft_strclen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allauren <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jbulant <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/04 14:05:35 by allauren          #+#    #+#             */
-/*   Updated: 2017/11/09 08:12:07 by allauren         ###   ########.fr       */
+/*   Created: 2017/11/09 22:14:20 by jbulant           #+#    #+#             */
+/*   Updated: 2017/11/11 05:14:47 by jbulant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strupcase(char *str)
-{
-	int i;
+#include "libft.h"
 
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] >= 'a' && str[i] <= 'z')
-			str[i] = str[i] - 32;
-		i++;
-	}
-	return (str);
+size_t		ft_strclen(const char *str, char c)
+{
+	size_t wordlen;
+
+	wordlen = 0;
+	while (str[wordlen] != c && str[wordlen])
+		wordlen++;
+	return (wordlen);
 }

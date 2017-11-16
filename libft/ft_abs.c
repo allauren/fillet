@@ -1,38 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_rev_params.c                                    :+:      :+:    :+:   */
+/*   ft_abs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allauren <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jbulant <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/06 07:54:44 by allauren          #+#    #+#             */
-/*   Updated: 2017/11/09 05:51:54 by allauren         ###   ########.fr       */
+/*   Created: 2017/11/10 00:15:02 by jbulant           #+#    #+#             */
+/*   Updated: 2017/11/10 00:16:33 by jbulant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		ft_rev_params(int argc, char **argv)
+int		ft_abs(int nb)
 {
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	if (argc != 1)
-	{
-		while (i < argc)
-			i++;
-		while (i > 1)
-		{
-			i--;
-			while (argv[i][j] != '\0')
-			{
-				ft_putchar(argv[i][j]);
-				j++;
-			}
-			ft_putchar('\n');
-			j = 0;
-		}
-	}
+	return ((nb < 0) ? -nb : nb);
 }

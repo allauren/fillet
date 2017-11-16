@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sqrt.c                                          :+:      :+:    :+:   */
+/*   ft_npow.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allauren <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jbulant <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/03 09:23:57 by allauren          #+#    #+#             */
-/*   Updated: 2017/11/09 08:11:53 by allauren         ###   ########.fr       */
+/*   Created: 2017/11/10 00:17:31 by jbulant           #+#    #+#             */
+/*   Updated: 2017/11/10 07:45:11 by jbulant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_sqrt(int nb)
+int		ft_npow(int n, int pow)
 {
-	int i;
+	int nb;
 
-	i = 1;
-	if (nb > 0)
-		while (i <= nb / i)
-		{
-			if (i * i == nb)
-				return (i);
-			i++;
-		}
-	return (0);
+	nb = n;
+	while (pow-- > 0)
+		nb *= n;
+	return (nb);
 }

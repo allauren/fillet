@@ -3,67 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allauren <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jbulant <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/25 02:28:33 by allauren          #+#    #+#             */
-/*   Updated: 2017/11/09 04:04:03 by allauren         ###   ########.fr       */
+/*   Created: 2017/11/09 20:10:33 by jbulant           #+#    #+#             */
+/*   Updated: 2017/11/11 23:58:14 by jbulant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static unsigned int	ft_countwords(char const *s, char c)
+char	**ft_strsplit(const char *str, char c)
 {
-	unsigned int	count;
-	unsigned int	i;
+	char	**splitted;
+	size_t	wordcount;
+	size_t	wordlen;
+	size_t	i;
 
-	i = 0;
-	count = 0;
-	while (s[i])
-	{
-		while (s[i] && s[i] == c)
-			i++;
-		if (s[i])
-			count++;
-		while (s[i] && s[i] != c)
-			i++;
-	}
-	return (count + 1);
-}
-
-static unsigned int	ft_sizeword(char const *s, char c)
-{
-	unsigned int	i;
-
-	i = 0;
-	while (s[i] && s[i] != c)
-		i++;
-	return (i + 1);
-}
-
-char				**ft_strsplit(char const *s, char c)
-{
-	char			**t;
-	unsigned int	i[3];
-
-	i[0] = 0;
-	i[1] = 0;
-	if (!s || !(t = (char**)malloc(sizeof(char*) * (ft_countwords(s, c)))))
+	if (!str)
 		return (NULL);
-	while (s[i[0]] && s[i[0]] == c)
-		i[0]++;
-	while (s[i[0]])
+	wordcount = ft_count_words(str, c);
+	if (!(splitted = ft_arstrnew(wordcount)))
+		return (NULL);
+	i = 0;
+	while (i < wordcount)
 	{
-		i[2] = 0;
-		if (!(t[i[1]] = (char*)malloc(sizeof(char) * ft_sizeword(&s[i[0]], c))))
+		while (*str == c)
+			str++;
+		wordlen = ft_strclen(str, c);
+		if (!(splitted[i++] = ft_strsub(str, 0, wordlen)))
 			return (NULL);
-		t[i[1]] = ft_strncpy(t[i[1]], &s[i[0]], (ft_sizeword(&s[i[0]], c) - 1));
-		t[i[1]][ft_sizeword(&s[i[0]], c) - 1] = '\0';
-		i[0] = i[0] + ft_sizeword(&s[i[0]], c) - 1;
-		while (s[i[0]] && s[i[0]] == c)
-			i[0]++;
-		i[1]++;
+		str = str + wordlen;
 	}
-	t[i[1]] = NULL;
-	return (t);
+	return (splitted);
 }

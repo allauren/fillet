@@ -1,40 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allauren <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jbulant <jbulant@marvin.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/10 22:53:26 by allauren          #+#    #+#             */
-/*   Updated: 2017/11/09 05:14:28 by allauren         ###   ########.fr       */
+/*   Created: 2017/10/09 22:59:18 by jbulant           #+#    #+#             */
+/*   Updated: 2017/11/12 04:01:04 by jbulant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *s1, const char *s2, size_t len)
+char			*ft_strnstr(const char *str, const char *to_find, size_t n)
 {
-	unsigned int	i;
-	unsigned int	j;
+	size_t flen;
 
-	j = 0;
-	i = 0;
-	if (!s2 && !s1)
-		return (0);
-	if (!s2[i])
-		return ((char*)s1);
-	while (s1[i])
+	if (!*to_find)
+		return ((char *)str);
+	flen = ft_strlen(to_find);
+	while (*str && n-- >= flen)
 	{
-		if (s1[i] == s2[j])
-		{
-			while (s2[j] && s1[i + j] == s2[j] && j < len)
-				j++;
-			if (!(s2[j]) && j + i <= len)
-				return ((char*)&s1[i]);
-			else if (j != len)
-				j = 0;
-		}
-		i++;
+		if (*str == *to_find
+			&& !ft_memcmp((const void *)str, (const void *)to_find, flen))
+			return ((char *)str);
+		str++;
 	}
 	return (NULL);
 }

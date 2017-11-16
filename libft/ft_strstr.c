@@ -3,36 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allauren <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jbulant <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/11 00:14:38 by allauren          #+#    #+#             */
-/*   Updated: 2017/11/09 05:13:22 by allauren         ###   ########.fr       */
+/*   Created: 2017/11/09 07:55:11 by jbulant           #+#    #+#             */
+/*   Updated: 2017/11/12 04:11:00 by jbulant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strstr(const char *str1, const char *str2)
+char			*ft_strstr(const char *str, const char *to_find)
 {
-	int i;
-	int j;
+	size_t flen;
 
-	j = 0;
-	i = 0;
-	if (!str2[i])
-		return ((char*)str1);
-	while (str1[i])
+	if (!*to_find)
+		return ((char *)str);
+	flen = ft_strlen(to_find);
+	while (*str)
 	{
-		if (!str2 || str1[i] == str2[j])
-		{
-			while (str2[j] && str1[i + j] == str2[j])
-				j++;
-			if (str2[j])
-				j = 0;
-			else
-				return ((char*)&str1[i]);
-		}
-		i++;
+		if (*str == *to_find
+			&& !ft_memcmp((const void *)str, (const void *)to_find, flen))
+			return ((char *)str);
+		str++;
 	}
 	return (NULL);
 }

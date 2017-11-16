@@ -1,20 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reader.c                                           :+:      :+:    :+:   */
+/*   pieces_manager.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbulant <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 00:07:57 by jbulant           #+#    #+#             */
-/*   Updated: 2017/11/15 12:42:37 by jbulant          ###   ########.fr       */
+/*   Updated: 2017/11/17 00:39:04 by allauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-
 #include "fillit.h"
 
-t_suint	atosint(const char *tetrimino)
+static void				set_size(t_piece *piece)
+{
+	t_suint	msk_hrz;
+	t_suint	msk_vrt;
+	int		i;
+
+	msk_hrz = 0xF000;
+	msk_vrt = 0X8888;
+	i = 0;
+	while (msk_hrz & piece->value && i < 4)
+	{
+		msk_hrz >>= 4;
+		i++;
+	}
+	piece->max_y = i;
+	i = 0;
+	while (msk_vrt & piece->value && i < 4)
+	{
+		msk_vrt >>= 1;
+		i++;
+	}
+	piece->max_x = i;
+}
+
+static t_suint			atosint(const char *tetrimino)
 {
 	t_suint			 ret;
 	unsigned int	c_count;
@@ -31,8 +53,6 @@ t_suint	atosint(const char *tetrimino)
 			c_count++;
 		i--;
 	}
-	t_mask ~0b0
-		
 	while (!(ret & 0x8888))
 		ret <<= 1;
 	while (!(ret & 0xF000))
@@ -40,53 +60,31 @@ t_suint	atosint(const char *tetrimino)
 	return (ret);
 }
 
-t_bool	buf_check(const char *buf)
+static unsigned long	sui_to_ul(t_suint mino)
 {
-	unsigned int i;
-
-	i = 0;
-	while (buf[i])
-	{
-		if ( i % 5 == 4 && buf[i] != '\n')
-			return (FALSE);
-		if (buf[i] != '.' && buf[i] != '#' &&  buf[i] != '\n')
-			return (FALSE);
-		i++;
-	}
-	return (TRUE);
-}
-
-void		parse(int fd)
-{
-	static char		buf[BUFF_SIZE + 1];
-	static t_suint	tetri_tab[26];
-	int				ret;
+	unsigned long	ul_mino;
+	unsigned long	mask;
 	int				i;
 
+	ul_mino = (unsigned long)mino;
+	ul_mino <<= 48;
+	mask = 0xFFFFFFFFFFFFFFF;
 	i = 0;
-	while ((ret = read(fd, buf, BUFF_SIZE)) > 1)
+	while (i++ < 4)
 	{
-		buf[ret] = '\0';
-		if (!buf_check(buf))
-		{
-			ft_putstr("error\n");
-			return (NULL);
-		}
-		tetri_tab[i++] = atosint(buf);
+		ul_mino = (ul_mino & ~mask) | (ul_mino >> 12 & mask);
+		mask >>= 16;
 	}
+	ul_mino = (ul_mino & 0xF000F000F000F000);
+	return (ul_mino);
 }
 
-int		main(int ac, const char **av)
+t_piece					create_piece(char *tetrimino)
 {
-	int fd;
+	t_piece new;
 
-	if (ac != 2)
-	{
-		ft_putendl(USAGE);
-		return (1);
-	}
-	if ((fd = open(av[1], O_RDONLY)) == -1)
-		return (1);
-	parse(fd);
-	return (0);
+	new.value = atosint(tetrimino);
+	set_size(&new);
+	new.mask = sui_to_ul(new.value);
+	return (new);
 }

@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   to_rm.c                                            :+:      :+:    :+:   */
+/*   ft_swap_addr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allauren <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jbulant <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/15 18:16:49 by allauren          #+#    #+#             */
-/*   Updated: 2017/11/15 18:18:55 by allauren         ###   ########.fr       */
+/*   Created: 2017/11/10 00:27:17 by jbulant           #+#    #+#             */
+/*   Updated: 2017/11/10 00:29:56 by jbulant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
-int	main()
+void	ft_swap_addr(void **ap1, void **ap2)
 {
-	printf("msk_vert:%d\n", (1 | 1 << 4 | 1 << 8 | 1 << 12));
-	return (0);
+	void *tmp;
+
+	tmp = *ap1;
+	*ap1 = *ap2;
+	*ap2 = tmp;
 }
