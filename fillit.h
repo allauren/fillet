@@ -6,7 +6,7 @@
 /*   By: jbulant <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 00:59:52 by jbulant           #+#    #+#             */
-/*   Updated: 2017/11/17 00:22:01 by jbulant          ###   ########.fr       */
+/*   Updated: 2017/11/17 03:29:59 by allauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct				s_map
 }							t_map;
 #define BUFF_SIZE 21
 #define USAGE "usage: ./fillit source_file"
-
+char							*print_tab(unsigned long *ul, char*);
 void							parse(int fd);
 t_piece							create_piece(char *tetrimino);
 t_bool							buf_check(const char *buf);

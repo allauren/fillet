@@ -6,7 +6,7 @@
 /*   By: jbulant <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 00:07:57 by jbulant           #+#    #+#             */
-/*   Updated: 2017/11/17 00:49:02 by allauren         ###   ########.fr       */
+/*   Updated: 2017/11/17 03:30:04 by allauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,15 @@ void			parse(int fd)
 		tetri_tab[i++] = create_piece(buf);
 	}
 	draw_map(tetri_tab);
+	static char bitsArray[273];
+	memset(bitsArray, '0', 272);
+	unsigned long	tab[4];
+	bzero(tab, sizeof(unsigned long) * 4);
+	tab[0] = tetri_tab[0].mask;
+	print_tab(tab, bitsArray);
+	tab[1] = tetri_tab[1].mask;
+	tab[0] = 0;
+	print_tab(tab, bitsArray);
 }
 
 int				main(int ac, const char **av)

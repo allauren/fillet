@@ -6,7 +6,7 @@
 #    By: jbulant <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 22:19:25 by jbulant           #+#    #+#              #
-#    Updated: 2017/11/17 00:47:26 by allauren         ###   ########.fr        #
+#    Updated: 2017/11/17 00:59:38 by allauren         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -14,7 +14,7 @@ NAME = fillit
 
 LIBFT = libft.a
 
-SRCS = reader.c pieces_manager.c erroc.c\
+SRCS = reader.c pieces_manager.c erroc.c dysplaytab.c\
 
 OBJ = $(SRC=.c:.o)
 
