@@ -6,11 +6,29 @@
 /*   By: jbulant <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 00:07:57 by jbulant           #+#    #+#             */
-/*   Updated: 2017/11/17 00:39:04 by allauren         ###   ########.fr       */
+/*   Updated: 2017/11/17 17:56:19 by allauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <stdlib.h>
+
+t_suint	revers_bit(t_suint tetri)
+{
+	t_suint	rev;
+	int		i;
+
+	rev = 0;
+	i = 0;
+	while (i < 16)
+	{
+		rev |= (!!(tetri & (1 << (15 - i)))) << i;
+		i++;
+	}
+	return (rev);
+}
+
+
 
 static void				set_size(t_piece *piece)
 {
@@ -18,6 +36,7 @@ static void				set_size(t_piece *piece)
 	t_suint	msk_vrt;
 	int		i;
 
+//	piece->value = revers_bit(piece->value);
 	msk_hrz = 0xF000;
 	msk_vrt = 0X8888;
 	i = 0;
@@ -34,6 +53,7 @@ static void				set_size(t_piece *piece)
 		i++;
 	}
 	piece->max_x = i;
+//	piece->value = revers_bit(piece->value);
 }
 
 static t_suint			atosint(const char *tetrimino)
@@ -60,12 +80,22 @@ static t_suint			atosint(const char *tetrimino)
 	return (ret);
 }
 
+#include <stdio.h>
+
 static unsigned long	sui_to_ul(t_suint mino)
 {
 	unsigned long	ul_mino;
 	unsigned long	mask;
-	int				i;
 
+	(void)mask;
+//	print_bit(&mino, 1);
+//	printf("\n\n\n");
+	mino = revers_bit(mino);
+//	print_bit(&mino, 1);
+//	printf("\n\n\n");
+	ul_mino = (mino & 0xF) | ((mino & 0xF0) << 12) | ((unsigned long)(mino & 0xF00) << (24)) | ((unsigned long)(mino & 0xF000) << (36));
+//	printf("%ld\n", ul_mino);
+	/*
 	ul_mino = (unsigned long)mino;
 	ul_mino <<= 48;
 	mask = 0xFFFFFFFFFFFFFFF;
@@ -76,6 +106,7 @@ static unsigned long	sui_to_ul(t_suint mino)
 		mask >>= 16;
 	}
 	ul_mino = (ul_mino & 0xF000F000F000F000);
+	*/
 	return (ul_mino);
 }
 
