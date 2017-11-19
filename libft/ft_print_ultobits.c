@@ -6,7 +6,7 @@
 /*   By: jbulant <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 02:32:16 by jbulant           #+#    #+#             */
-/*   Updated: 2017/11/16 06:56:54 by jbulant          ###   ########.fr       */
+/*   Updated: 2017/11/18 10:22:54 by allauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void			ft_print_ultobits(unsigned long ul)
 	bitsArray[50] = '\n';
 	bitsArray[67] = '\n';
 	bitsArray[68] = '\0';
-	i = 66;
+	i = 0;
 	while (ul > 0)
 	{
 		if (bitsArray[i] != '\n')
@@ -31,7 +31,7 @@ void			ft_print_ultobits(unsigned long ul)
 			bitsArray[i] = ul % 2 + '0';
 			ul /= 2;
 		}
-		i--;
+		i++;
 	}
 	ft_putstr(bitsArray);
 }

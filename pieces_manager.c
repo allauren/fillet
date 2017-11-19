@@ -6,7 +6,7 @@
 /*   By: jbulant <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 00:07:57 by jbulant           #+#    #+#             */
-/*   Updated: 2017/11/17 17:56:19 by allauren         ###   ########.fr       */
+/*   Updated: 2017/11/19 18:55:31 by allauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,15 @@ t_suint	revers_bit(t_suint tetri)
 	return (rev);
 }
 
-
-
 static void				set_size(t_piece *piece)
 {
 	t_suint	msk_hrz;
 	t_suint	msk_vrt;
 	int		i;
 
-//	piece->value = revers_bit(piece->value);
 	msk_hrz = 0xF000;
 	msk_vrt = 0X8888;
+//	piece->value = revers_bit(piece->value);
 	i = 0;
 	while (msk_hrz & piece->value && i < 4)
 	{
@@ -80,8 +78,6 @@ static t_suint			atosint(const char *tetrimino)
 	return (ret);
 }
 
-#include <stdio.h>
-
 static unsigned long	sui_to_ul(t_suint mino)
 {
 	unsigned long	ul_mino;
@@ -93,7 +89,9 @@ static unsigned long	sui_to_ul(t_suint mino)
 	mino = revers_bit(mino);
 //	print_bit(&mino, 1);
 //	printf("\n\n\n");
-	ul_mino = (mino & 0xF) | ((mino & 0xF0) << 12) | ((unsigned long)(mino & 0xF00) << (24)) | ((unsigned long)(mino & 0xF000) << (36));
+	ul_mino = (mino & 0xF) | ((mino & 0xF0) << 12) 
+				| ((unsigned long)(mino & 0xF00) << (24)) 
+				| ((unsigned long)(mino & 0xF000) << (36));
 //	printf("%ld\n", ul_mino);
 	/*
 	ul_mino = (unsigned long)mino;

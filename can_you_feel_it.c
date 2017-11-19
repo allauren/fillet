@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
+/*
 void	print_bit(unsigned short *data, int size)
 {
 	int		i;
@@ -21,7 +22,7 @@ void	print_bit(unsigned short *data, int size)
 		i++;
 	}
 }
-/*
+
 int	main()
 {
 	int					i;
@@ -49,8 +50,8 @@ int	main()
 	double	lola = 3.14159265359;
 	yo2 = *((unsigned long*)(&lola));
 	print_bit((unsigned short*)&yo2, 4);
-*/
-/*
+
+
 	print_bit(map, 16);
 	printf("\n\n\n\n");
 	i = 0;
