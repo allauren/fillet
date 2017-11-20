@@ -6,14 +6,14 @@
 /*   By: jbulant <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 00:07:57 by jbulant           #+#    #+#             */
-/*   Updated: 2017/11/19 18:55:31 by allauren         ###   ########.fr       */
+/*   Updated: 2017/11/20 07:50:45 by jbulant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <stdlib.h>
 
-t_suint	revers_bit(t_suint tetri)
+t_suint					revers_bit(t_suint tetri)
 {
 	t_suint	rev;
 	int		i;
@@ -36,7 +36,6 @@ static void				set_size(t_piece *piece)
 
 	msk_hrz = 0xF000;
 	msk_vrt = 0X8888;
-//	piece->value = revers_bit(piece->value);
 	i = 0;
 	while (msk_hrz & piece->value && i < 4)
 	{
@@ -51,12 +50,11 @@ static void				set_size(t_piece *piece)
 		i++;
 	}
 	piece->max_x = i;
-//	piece->value = revers_bit(piece->value);
 }
 
 static t_suint			atosint(const char *tetrimino)
 {
-	t_suint			 ret;
+	t_suint			ret;
 	unsigned int	c_count;
 	size_t			i;
 
@@ -71,6 +69,8 @@ static t_suint			atosint(const char *tetrimino)
 			c_count++;
 		i--;
 	}
+	if (!ret)
+		return (0);
 	while (!(ret & 0x8888))
 		ret <<= 1;
 	while (!(ret & 0xF000))
@@ -81,30 +81,11 @@ static t_suint			atosint(const char *tetrimino)
 static unsigned long	sui_to_ul(t_suint mino)
 {
 	unsigned long	ul_mino;
-	unsigned long	mask;
 
-	(void)mask;
-//	print_bit(&mino, 1);
-//	printf("\n\n\n");
 	mino = revers_bit(mino);
-//	print_bit(&mino, 1);
-//	printf("\n\n\n");
-	ul_mino = (mino & 0xF) | ((mino & 0xF0) << 12) 
-				| ((unsigned long)(mino & 0xF00) << (24)) 
+	ul_mino = (mino & 0xF) | ((mino & 0xF0) << 12)
+				| ((unsigned long)(mino & 0xF00) << (24))
 				| ((unsigned long)(mino & 0xF000) << (36));
-//	printf("%ld\n", ul_mino);
-	/*
-	ul_mino = (unsigned long)mino;
-	ul_mino <<= 48;
-	mask = 0xFFFFFFFFFFFFFFF;
-	i = 0;
-	while (i++ < 4)
-	{
-		ul_mino = (ul_mino & ~mask) | (ul_mino >> 12 & mask);
-		mask >>= 16;
-	}
-	ul_mino = (ul_mino & 0xF000F000F000F000);
-	*/
 	return (ul_mino);
 }
 

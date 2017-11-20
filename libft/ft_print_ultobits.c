@@ -6,7 +6,7 @@
 /*   By: jbulant <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 02:32:16 by jbulant           #+#    #+#             */
-/*   Updated: 2017/11/18 10:22:54 by allauren         ###   ########.fr       */
+/*   Updated: 2017/11/20 07:58:41 by jbulant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,24 @@
 
 void			ft_print_ultobits(unsigned long ul)
 {
-	char bitsArray[69];
-	int i;
+	char	bits_array[69];
+	int		i;
 
-	ft_memset(bitsArray, '0', 68);
-	bitsArray[16] = '\n';
-	bitsArray[33] = '\n';
-	bitsArray[50] = '\n';
-	bitsArray[67] = '\n';
-	bitsArray[68] = '\0';
+	ft_memset(bits_array, '0', 68);
+	bits_array[16] = '\n';
+	bits_array[33] = '\n';
+	bits_array[50] = '\n';
+	bits_array[67] = '\n';
+	bits_array[68] = '\0';
 	i = 0;
 	while (ul > 0)
 	{
-		if (bitsArray[i] != '\n')
+		if (bits_array[i] != '\n')
 		{
-			bitsArray[i] = ul % 2 + '0';
+			bits_array[i] = ul % 2 + '0';
 			ul /= 2;
 		}
 		i++;
 	}
-	ft_putstr(bitsArray);
+	ft_putstr(bits_array);
 }

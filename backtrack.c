@@ -6,7 +6,7 @@
 /*   By: allauren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 18:39:49 by allauren          #+#    #+#             */
-/*   Updated: 2017/11/19 19:21:02 by allauren         ###   ########.fr       */
+/*   Updated: 2017/11/20 07:48:14 by jbulant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,9 @@ t_bool				ft_back(t_piece *tab, int size, t_us *map, int lvl)
 		s.i = -1;
 		while (++s.i < s.max_i)
 		{
-			if(is_valid_pos(tab + lvl, (unsigned long*)(map + s.j)))
+			if (is_valid_pos(tab + lvl, (unsigned long*)(map + s.j)))
 			{
 				if (((!tab[lvl + 1].value || ft_back(tab, size, map, lvl + 1))
-							&& ((tab[lvl].pos_x = s.i) + 1)
 							&& ((tab[lvl].pos_y = s.j) + 1)))
 					return (TRUE);
 				*(unsigned long*)(map + s.j) ^= tab[lvl].mask;
@@ -82,18 +81,4 @@ t_bool				ft_back(t_piece *tab, int size, t_us *map, int lvl)
 			tab[lvl].mask >>= s.max_i;
 	}
 	return (FALSE);
-}
-
-void				print_tetri_mask(t_piece *tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i].value)
-	{
-		printf("piece:%c:\n", (i + 'A'));
-		print_bit((t_us*)(&tab[i].mask), 4);
-		printf(" ");
-		i++;
-	}
 }
